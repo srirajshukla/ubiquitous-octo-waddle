@@ -1,0 +1,39 @@
+import repository.db as db
+
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+
+
+class SavedFile(db.Base):
+    __tablename__ = "SavedFile"
+    id = Column(Integer, primary_key=True)
+    year = Column(String)
+    filename = Column(String)
+    url = Column(String)
+    embed_status = Column(String, default="In Progress")
+    type = Column(String)
+    user = Column(String)
+    trackerid = Column(String)
+
+
+from sqlalchemy.orm import Session
+
+
+def create_savedfile(db: Session, year, filename, url, type, user, trackerid):
+    db_savedfile = SavedFile(
+        year=year, filename=filename, url=url, type=type, user=user, trackerid=trackerid
+    )
+    db.add(db_savedfile)
+    db.commit()
+    db.refresh(db_savedfile)
+    return db_savedfile
+
+
+def get_savedfile(db: Session, year, user):
+    return (
+        db.query(SavedFile).filter(SavedFile.year == year, SavedFile.user == user).all()
+    )
+
+
+def get_allfiles(db: Session, user):
+    return db.query(SavedFile).filter(SavedFile.user == user).all()
