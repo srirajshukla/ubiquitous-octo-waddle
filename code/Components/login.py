@@ -31,6 +31,11 @@ def show():
             # res = requests.post(url, data = myobj)
             # print(res)
         localSt.setItem("credential", creds)
+        if 'username' not in st.session_state:
+            st.session_state.username = user
+        if 'password' not in st.session_state:
+            st.session_state.password = passwd
+        
             
         
     myobj = {

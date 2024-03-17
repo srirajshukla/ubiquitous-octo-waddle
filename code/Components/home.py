@@ -7,6 +7,7 @@ from Components import login
 
 from streamlit_local_storage import LocalStorage
 import app
+import time
 
 
 def show(username):
@@ -16,8 +17,20 @@ def show(username):
     # logout = st.button("Logout", type="primary")
     # if logout:
     #     localS.deleteAll()
-    #     # st.rerun()
-        
+    #     time.sleep(3)
+    #     css = '''
+    # <style>
+        # [data-testid='stButton'] {
+            
+        #     display: none;
+        # }
+        # [data-testid='login'] {
+        #     display: none;
+        # }
+    # </style>
+    # '''
+
+    #     st.markdown(css, unsafe_allow_html=True)
     #     login.show()
     #     # st.rerun()
         
