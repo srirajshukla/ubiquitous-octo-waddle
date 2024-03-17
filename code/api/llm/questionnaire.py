@@ -26,13 +26,6 @@ embeddings = AzureOpenAIEmbeddings(
     openai_api_version=os.getenv("OPENAI_API_VERSION"),
 )
 
-index_name: str = "esg-survey"
-vector: AzureSearch = AzureSearch(
-    azure_search_endpoint="https://esg-survey.search.windows.net",
-    azure_search_key=os.getenv("AZURE_SEARCH_KEY"),
-    index_name=index_name,
-    embedding_function=embeddings.embed_query,
-)
 
 review_template = """Your job is to use ESG (A sustainability report is a report published by companies on the environmental, social and governance (ESG) impacts of their activities)
 documents and annual reports to answer questions. Use
@@ -55,16 +48,28 @@ esg_prompt = ChatPromptTemplate(
     input_variables=["context", "question"], messages=messages
 )
 
-retriever = vector.as_retriever()
 
-esg_vector_chain = RetrievalQA.from_chain_type(
-    llm=llm,
-    chain_type="stuff",
-    retriever=retriever,
-    return_source_documents=True
-)
+def query(query, year, allyears):
+    if year not in allyears:
+        return "No relevant documents found for year "+year+"."
+    index_name: str = f"esg-survey-{year}"
 
-def query(query):
-    # query = "What was net income of Wells fargo in year 2022?"
+    vector: AzureSearch = AzureSearch(
+        azure_search_endpoint="https://esg-survey.search.windows.net",
+        azure_search_key=os.getenv("AZURE_SEARCH_KEY"),
+        index_name=index_name,
+        embedding_function=embeddings.embed_query,
+    )
+
+    retriever = vector.as_retriever()
+
+    esg_vector_chain = RetrievalQA.from_chain_type(
+        llm=llm,
+        chain_type="stuff",
+        retriever=retriever,
+        return_source_documents=True
+    )
+
+
     response = esg_vector_chain.invoke(query)
     return response
