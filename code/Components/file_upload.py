@@ -7,7 +7,6 @@ import time
 
 import requests
 
-
 def show():
     st.title('ESG Survey')
     option = st.selectbox(
@@ -15,7 +14,8 @@ def show():
     ('2019', '2020', '2021', '2022', '2023'))
 
     # st.warning('This is a warning', icon="⚠️")
-
+    API_BASE_PATH = os.environ.get("API_BASE_PATH")
+    print(f"API_BASE_PATH={API_BASE_PATH}", flush=True)
     uploaded_files = st.file_uploader("Choose a PDF file", accept_multiple_files=True)
     from io import BytesIO, BufferedReader
     files = []
@@ -46,8 +46,7 @@ def show():
     #     'DocumentURL': (None, 'ok'),
     #     'year': (None, '2023'),
     # }
-
-    response = requests.post('http://localhost:8000/esgreports/upload', headers=headers, files=files, auth=("stanleyjobson", "swordfish"))
+    response = requests.post(f'{API_BASE_PATH}/esgreports/upload', headers=headers, files=files, auth=("stanleyjobson", "swordfish"))
     print(response.json())
     if len(uploaded_files) != 0 :
         alert = st.toast("Successfully Uploaded!", icon='✔️') # Display the alert
