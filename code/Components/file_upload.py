@@ -72,7 +72,7 @@ def show():
     
     if upStatus:
         uploaded_files = []
-        response = requests.post('http://localhost:8000/esgreports/retrieve', headers=headers, json=myObj, auth=("stanleyjobson", "swordfish"))
+        response = requests.post(f'{API_BASE_PATH}/esgreports/retrieve', headers=headers, json=myObj, auth=("stanleyjobson", "swordfish"))
         st.write(response.json())
         print(response.json())
         

@@ -11,7 +11,7 @@ import json
 
 def show():
 
-
+    API_BASE_PATH = os.environ.get("API_BASE_PATH")
     st.title('Report Generation')
     option = st.selectbox(
     'Year',
@@ -56,7 +56,7 @@ def show():
     
     with col2:
         if st.button("Generate", type="primary"):
-            response = requests.post('http://localhost:8000/questionnaire/generatefirstdraft/pdf',
+            response = requests.post(f'{API_BASE_PATH}/questionnaire/generatefirstdraft/pdf',
                                      headers=headers,
                                      files={
                                     'SurveyQuestionnaireDocumentName': data,
