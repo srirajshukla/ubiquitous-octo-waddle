@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def pdf_loader(filenames):
+def pdf_loader(filenames, year):
     print("starting pdf loader")
     embeddings = AzureOpenAIEmbeddings(
         azure_deployment="embed1",
@@ -15,15 +15,18 @@ def pdf_loader(filenames):
     )
     print("loaded embeddings")
 
-    index_name: str = "esg-survey"
+    index_name: str = f"esg-survey-{year}"
+
     vector: AzureSearch = AzureSearch(
         azure_search_endpoint="https://esg-survey.search.windows.net",
         azure_search_key=os.getenv("AZURE_SEARCH_KEY"),
         index_name=index_name,
         embedding_function=embeddings.embed_query,
     )
+    
     print("loaded vector")
     outs = []
+
     for filename in filenames:
         loader = PyPDFLoader(filename)
         pages = loader.load_and_split()
