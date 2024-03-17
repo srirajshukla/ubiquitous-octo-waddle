@@ -1,6 +1,6 @@
 import repository.db as db
 
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, update
 from sqlalchemy.orm import relationship
 
 
@@ -34,6 +34,18 @@ def get_savedfile(db: Session, year, user):
         db.query(SavedFile).filter(SavedFile.year == year, SavedFile.user == user).all()
     )
 
+def get_taskid_status(db: Session, taskid, user, year):
+    return db.query(SavedFile).filter(SavedFile.user == user, SavedFile.trackerid==taskid, SavedFile.year == year).first()
+
 
 def get_allfiles(db: Session, user):
     return db.query(SavedFile).filter(SavedFile.user == user).all()
+
+
+def update_savedfile(db: Session, filename, user, year, trackerid, embed_status):
+    savedfile = db.query(SavedFile).filter(SavedFile.user == user, SavedFile.year == year, SavedFile.filename==filename, SavedFile.trackerid==trackerid).first()
+    savedfile.embed_status = embed_status
+    db.add(savedfile)
+    db.commit()
+    db.refresh(savedfile)
+    return savedfile
