@@ -2,7 +2,7 @@ import fitz
 import requests
 import pandas as pd
 import re
-from vector_chain import gen_esg_vector
+from code.api.llm.vector_chain import gen_esg_vector
 
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
@@ -233,9 +233,9 @@ def create_pdf_with_answers(year, input_pdf_path, output_pdf_path):
 
     print("New PDF created successfully!")
 
-pdf_path = '/home/chandan/orange/code/Survey-Questionnire-Part1.pdf'
-output_pdf_path = '/home/chandan/orange/code/output.pdf'
-year = "2021"
+# pdf_path = '/home/chandan/orange/code/Survey-Questionnire-Part1.pdf'
+# output_pdf_path = '/home/chandan/orange/code/output.pdf'
+# year = "2021"
 
-# Create PDF with sample answers for each question
-create_pdf_with_answers(year, pdf_path, output_pdf_path)
+# # Create PDF with sample answers for each question
+# create_pdf_with_answers(year, pdf_path, output_pdf_path)

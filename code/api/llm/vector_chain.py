@@ -61,14 +61,16 @@ def gen_esg_vector(year):
         embedding_function=embeddings.embed_query,
     )
 
+    # !!!!!!!
+    # change retriver here tooooo !!!!!!! 
     if year == "2021":
-        retriever = vector_2021.as_retriever()
+        retriever = vector_2021.as_retriever(search_kwargs={"k":6})
     elif year == "2022":
-        retriever = vector_2022.as_retriever()
+        retriever = vector_2022.as_retriever(search_kwargs={"k":6})
     elif year == "2023":
-        retriever = vector_2023.as_retriever()
+        retriever = vector_2023.as_retriever(search_kwargs={"k":6})
     else:
-        retriever = vector_all.as_retriever()
+        retriever = vector_all.as_retriever(search_kwargs={"k":6})
     
     review_template = """Your job is to use environmental, social and governance (ESG) 
     documents and annual reports to answer questions. Use
