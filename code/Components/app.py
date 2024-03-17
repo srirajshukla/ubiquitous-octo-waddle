@@ -78,12 +78,22 @@ def main():
         # print(cred_data[0], cred_data[1])
         username = cred_data[0]
         password = cred_data[1]
-        
+        if 'username' not in st.session_state:
+            st.session_state.username = username
+        if 'password' not in st.session_state:
+            st.session_state.password = password
         print("final",username, password)
         # password = localS.getItem('password')
     else:
         username = ''
         password = ''
+    
+    username = ''
+    password = ''
+    if 'username' in st.session_state:
+        username = st.session_state.username
+    if 'password' in st.session_state:
+        password = st.session_state.password
 
     if comp == "Home" :
         if username == "Stanleyjobson" and password == "swordfish":
