@@ -4,9 +4,10 @@ import pandas as pd
 import numpy as np
 import os
 import time
+from io import BytesIO, BufferedReader
 
 import requests
-
+import json
 
 def show():
 
@@ -19,23 +20,56 @@ def show():
     # st.warning('This is a warning', icon="⚠️")
     
     # col1, col2 = st.columns([1,1])
+    files = ()
     
-    uploaded_file = st.file_uploader("Choose a PDF file", accept_multiple_files=False)
+    uploaded_file = st.file_uploader("Choose a PDF file", type = "pdf", accept_multiple_files=False)
     # bytes_data = uploaded_file.read()
     if uploaded_file:
+        bytes_data = uploaded_file.read()
+        f_handle = BytesIO()
+        f_handle.write(bytes_data)
+        f_handle.seek(0)
+        br = BufferedReader(f_handle)
+        data = (uploaded_file.name, br, 'application/pdf')
+        files = ("documentName", (uploaded_file.name, br, 'application/pdf'))
+        
         st.write("filename:", uploaded_file.name)
     # st.write(bytes_data)
         
-    if uploaded_file:
-        alert = st.toast("Successfully Uploaded!", icon='✔️') # Display the alert
-        time.sleep(3) # Wait for 3 seconds
-        alert.empty() # Clear the alert
-        # st.success("Successfully Uploaded")
+    # if uploaded_file:
+    #     alert = st.toast("Successfully Uploaded!", icon='✔️') # Display the alert
+    #     time.sleep(3) # Wait for 3 seconds
+    #     alert.empty() # Clear the alert
+    #     # st.success("Successfully Uploaded")
         
     col1, col2, col3 = st.columns([1,1,1])
     
+    headers = {
+        'accept': 'application/json',
+        # 'Content-Type': 'multipart/form-data',
+    }
+    
+    myObj = {
+            "generateReportForYear": option,
+            "userId": "Stanleyjobson"
+            }
+    
     with col2:
-        st.button("Generate", type="primary")
+        if st.button("Generate", type="primary"):
+            response = requests.post('http://localhost:8000/questionnaire/generatefirstdraft/pdf',
+                                     headers=headers,
+                                     files={
+                                    'SurveyQuestionnaireDocumentName': data,
+                                    'documentType': (None, 'PDF'),
+                                    'metadata': (None, json.dumps(myObj))},
+                                     auth=("stanleyjobson", "swordfish"))
+            uploaded_files = []
+            print(response.text)
+            if len(uploaded_files) != 0 :
+                alert = st.toast("Successfully Uploaded!", icon='✔️') # Display the alert
+                time.sleep(3) # Wait for 3 seconds
+                alert.empty() # Clear the alert
+                # st.success("Successfully Uploaded")
         
     
 
