@@ -190,8 +190,11 @@ class QuestionAnswerResult(BaseModel):
 import llm.questionnaire as llmquestions
 
 @router.post("/questionnaire/generatefirstdraft/generateAnswer")
-def question_answer(question: QuestionAnswer):
-    response = llmquestions.query(question.inputQuestion)
+def question_answer(question: QuestionAnswer,
+    db: Session = Depends(db.get_db),
+    user: str = Depends(get_current_username)):
+    all_years = SF.get_all_years(db, user)
+    response = llmquestions.query(question.inputQuestion, question.reportYear, all_years)
     return {
         "reportYear": question.reportYear,
         "questionnaireSummary": {

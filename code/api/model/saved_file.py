@@ -49,3 +49,12 @@ def update_savedfile(db: Session, filename, user, year, trackerid, embed_status)
     db.commit()
     db.refresh(savedfile)
     return savedfile
+
+
+def get_all_years(db: Session, user):
+    years = db.query(SavedFile.year).filter(SavedFile.user == user).distinct().all()
+    print(years)
+    ans = []
+    for year in years:
+        ans.append(year[0])
+    return ans

@@ -7,7 +7,6 @@ import time
 
 import requests
 
-
 def show():
     st.title('ESG Survey')
     option = st.selectbox(
@@ -15,8 +14,9 @@ def show():
     ('2019', '2020', '2021', '2022', '2023'))
 
     # st.warning('This is a warning', icon="⚠️")
-    uploaded_files = st.file_uploader("Choose a PDF file", type="pdf", accept_multiple_files=True)
-    print(uploaded_files)
+    API_BASE_PATH = os.environ.get("API_BASE_PATH")
+    print(f"API_BASE_PATH={API_BASE_PATH}", flush=True)
+    uploaded_files = st.file_uploader("Choose a PDF file", accept_multiple_files=True)
     from io import BytesIO, BufferedReader
     files = []
     urls = []
@@ -53,7 +53,7 @@ def show():
         upload = st.button('Upload', type="primary")
         
     if upload:
-        response = requests.post('http://localhost:8000/esgreports/upload', headers=headers, files=files, auth=("stanleyjobson", "swordfish"))
+        response = requests.post(f'{API_BASE_PATH}/esgreports/upload', headers=headers, files=files, auth=("stanleyjobson", "swordfish"))
         # uploaded_files = []
         print(response.json())
         if len(uploaded_files) != 0 :
