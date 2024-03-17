@@ -14,6 +14,9 @@ from pydantic import BaseModel, ValidationError, Field, model_validator
 from sqlalchemy.orm import Session
 
 import llm.training as llmtraining
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 router = APIRouter()
 
@@ -24,12 +27,12 @@ def get_current_username(
     credentials: Annotated[HTTPBasicCredentials, Depends(security)]
 ):
     current_username_bytes = credentials.username.encode("utf8")
-    correct_username_bytes = b"stanleyjobson"
+    correct_username_bytes = os.getenv("USERNAME").encode("utf8")
     is_correct_username = secrets.compare_digest(
         current_username_bytes, correct_username_bytes
     )
     current_password_bytes = credentials.password.encode("utf8")
-    correct_password_bytes = b"swordfish"
+    correct_password_bytes = os.getenv("PASSWORD").encode("utf8")
     is_correct_password = secrets.compare_digest(
         current_password_bytes, correct_password_bytes
     )
@@ -54,6 +57,8 @@ def upload_file_bg_task(db: Session, filepaths, user, trackingid, year):
         print(out)
     print(status)
 
+from io import BytesIO, BufferedReader
+import repository.azure_storage as azstore
 
 @router.post("/esgreports/upload")
 async def upload_files(
@@ -69,12 +74,13 @@ async def upload_files(
     print(DocumentURL)
 
     trackerid = str(uuid.uuid4())
-    status = "failure"
+    status = "IN PROGRESS"
     filepaths = []
     for file, url in zip(documentName, DocumentURL):
         with open(file.filename, "wb") as out_file:
             content = file.file.read()
             out_file.write(content)
+            azstore.upload_blob_to_container(content, file.filename, year)
             SF.create_savedfile(
                 db, year, file.filename, url, "training", user, trackerid
             )
