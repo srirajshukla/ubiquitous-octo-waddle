@@ -2,9 +2,10 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores.azuresearch import AzureSearch
 from langchain_openai import AzureOpenAIEmbeddings, OpenAIEmbeddings
 import os
-os.environ["OPENAI_API_VERSION"] = "2024-02-15-preview"
-os.environ["AZURE_OPENAI_ENDPOINT"] = "https://openaimodelv3si.openai.azure.com/"
-os.environ["AZURE_OPENAI_API_KEY"] = "e248b8e8dbf94849ac6888971cacc9ae"
+
+from dotenv import load_dotenv
+load_dotenv()
+
 
 def pdf_loader(filenames):
     print("starting pdf loader")
@@ -17,7 +18,7 @@ def pdf_loader(filenames):
     index_name: str = "esg-survey"
     vector: AzureSearch = AzureSearch(
         azure_search_endpoint="https://esg-survey.search.windows.net",
-        azure_search_key="G3KuN7j6O10Tn2AOgJXlgEhDgKqStP9iZQdLor9ajaAzSeBVCNBy",
+        azure_search_key=os.getenv("AZURE_SEARCH_KEY"),
         index_name=index_name,
         embedding_function=embeddings.embed_query,
     )
