@@ -2,7 +2,7 @@ import fitz
 import requests
 import pandas as pd
 import re
-from code.api.llm.vector_chain import gen_esg_vector
+from llm.vector_chain import gen_esg_vector
 
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
