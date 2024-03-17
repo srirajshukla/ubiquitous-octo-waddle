@@ -56,5 +56,5 @@ def get_all_years(db: Session, user):
     print(years)
     ans = []
     for year in years:
-        ans.append(year[1])
+        ans.append(year[0])
     return ans
