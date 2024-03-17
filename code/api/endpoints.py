@@ -10,3 +10,7 @@ app.include_router(esgreporting.router)
 app.include_router(authroutes.router)
 
 
+import datetime
+@app.get("/ping")
+def get_ping():
+    return {"ping": datetime.datetime.now()}

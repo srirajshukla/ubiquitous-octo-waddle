@@ -13,6 +13,9 @@ from langchain_openai import AzureChatOpenAI
 
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 llm = AzureChatOpenAI(
     openai_api_version="2023-05-15",
     azure_deployment="trial1",
@@ -26,7 +29,7 @@ embeddings = AzureOpenAIEmbeddings(
 index_name: str = "esg-survey"
 vector: AzureSearch = AzureSearch(
     azure_search_endpoint="https://esg-survey.search.windows.net",
-    azure_search_key="G3KuN7j6O10Tn2AOgJXlgEhDgKqStP9iZQdLor9ajaAzSeBVCNBy",
+    azure_search_key=os.getenv("AZURE_SEARCH_KEY"),
     index_name=index_name,
     embedding_function=embeddings.embed_query,
 )
