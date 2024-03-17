@@ -6,6 +6,7 @@ import uuid
 
 import repository.db as db
 import model.saved_file as SF
+from llm.genpdf import create_pdf_with_answers
 
 from fastapi import Body, FastAPI, Form, UploadFile, File, Depends, HTTPException, status, BackgroundTasks
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
@@ -21,7 +22,6 @@ load_dotenv()
 router = APIRouter()
 
 security = HTTPBasic()
-
 
 def get_current_username(
     credentials: Annotated[HTTPBasicCredentials, Depends(security)]
@@ -173,11 +173,19 @@ def get_draft_status(
     file = SF.get_taskid_status(db, TaskId, user, reportYear)
     return {"taskid": file.trackerid, "status": file.embed_status, "created": datetime.datetime.now()}
 
+from requests_toolbelt import MultipartEncoder
+from fastapi.responses import Response
 
 @router.get("/firstdraftreport/download/result/{reportYear}")
 def get_draft_report(reportYear):
-    return {"file": "ok"}
-
+    outputpdf = "/home/chandan/orange/code/survey_report/output.pdf"
+    inputpdf = f"/home/chandan/orange/code/survey_ques/{reportYear}.pdf"
+    create_pdf_with_answers(reportYear, inputpdf, outputpdf)
+    return MultipartEncoder(
+        {
+            'documents': (reportYear, open(outputpdf, 'rb'), 'application/pdf')
+        }
+    )
 
 class QuestionAnswer(BaseModel):
     reportYear: str

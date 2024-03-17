@@ -1,5 +1,5 @@
 import streamlit as st
-from Components import home, file_upload, report, chatbot
+import home, file_upload, report, chatbot
 # from streamlit.server.server import Server
 # from streamlit.state.session_state import SessionState
 from streamlit_option_menu import option_menu

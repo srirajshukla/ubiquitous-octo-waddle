@@ -2,6 +2,7 @@ import streamlit as st
 import random
 import time
 import requests
+import os
 
 
 # Streamed response emulator
@@ -17,7 +18,7 @@ def metadata_generator(result):
             
 
 def show():
-    
+    API_BASE_PATH = os.environ.get("API_BASE_PATH")
     # st.title("Simple chat")
     option = st.selectbox(
     'Year',
@@ -52,7 +53,7 @@ def show():
             "inputQuestion": prompt,
         }
         
-        res = requests.post('http://localhost:8000/questionnaire/generatefirstdraft/generateAnswer', headers=headers, json = myObj, auth=("stanleyjobson", "swordfish"))
+        res = requests.post(f'{API_BASE_PATH}/questionnaire/generatefirstdraft/generateAnswer', headers=headers, json = myObj, auth=("stanleyjobson", "swordfish"))
         print(res.json())
         
         result = res.json()['questionnaireSummary']['response']['result']

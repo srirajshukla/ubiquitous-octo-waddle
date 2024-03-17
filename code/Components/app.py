@@ -1,5 +1,5 @@
 import streamlit as st
-import file_upload, report, chatbot
+import file_upload, report, chatbot, home, login
 # from streamlit.state.session_state import SessionState
 from streamlit_option_menu import option_menu
 import requests
@@ -125,7 +125,7 @@ def main():
             ret_cred = ""
             login.show()
     else:
-        show()
+        login.show()
         
 
 if __name__ == "__main__":
