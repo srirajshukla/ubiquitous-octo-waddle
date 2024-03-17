@@ -1,0 +1,59 @@
+name: esg_survey_automation_orange
+services:
+    db:
+        container_name: db
+        networks:
+            - wfhack
+        environment:
+            - POSTGRES_PASSWORD=password
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        restart: unless-stopped
+        image: postgres:15.1-alpine
+    api:
+        container_name: api
+        build:
+          context: ./api
+          dockerfile: ./Dockerfile
+        networks:
+            - wfhack
+        ports:
+            - 8000:8000
+        depends_on:
+            - db
+        environment:
+            - POSTGRES_CONN_STR=postgresql://postgres:password@db:5432/postgres
+        restart: unless-stopped
+        env_file:
+            - .env
+        links:
+            - db
+        image: api:latest
+    ui:
+        container_name: ui
+        build:
+          context: ./Components
+          dockerfile: ./Dockerfile
+        networks:
+            - wfhack
+        ports:
+            - 8501:8501
+        depends_on:
+            - api
+        restart: unless-stopped
+        links:
+            - db
+            - api
+        environment:
+            - API_BASE_PATH=http://api:8000
+        image: ui:latest
+networks:
+    wfhack:
+        external: true
+        name: wfhack
+volumes:
+    pgdata:
+        external: true
+        name: pgdata
