@@ -15,4 +15,4 @@ def upload_blob_to_container(content: bytes, filename: str, year: str):
     container_name = "fileupload"
     local_file_name = f"{year}/{filename}"
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)
-    blob_client.upload_blob(BufferedReader(bio))
+    blob_client.upload_blob(BufferedReader(bio), overwrite=True)
