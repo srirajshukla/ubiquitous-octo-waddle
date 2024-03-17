@@ -5,8 +5,13 @@ from sqlalchemy.ext.declarative import declarative_base
 # from model.bearer import JWTBearer
 # from model.user import User
 # import jwt
+import dotenv
+import os
+dotenv.load_dotenv()
 
-engine = create_engine("sqlite:///xx.db", connect_args={"check_same_thread": False})
+DB_PATH = os.environ.get('POSTGRES_CONN_STR')
+
+engine = create_engine(DB_PATH)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
