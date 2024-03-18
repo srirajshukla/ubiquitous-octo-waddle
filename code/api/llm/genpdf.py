@@ -167,6 +167,8 @@ def create_pdf_with_answers(year, input_pdf_path, output_pdf_path):
             df_list = pd.read_html(html)
             for table in df_list:
                 for column_name, column_data in table.items():
+                    if not isinstance(column_name, str):
+                         continue
                     column_values = column_data.tolist()
                     resquery = f"Question: {question_text} Sub-question: {column_name} Response-option: {column_values}"
                     response = esg_vector_chain.invoke(resquery)
@@ -233,9 +235,9 @@ def create_pdf_with_answers(year, input_pdf_path, output_pdf_path):
 
     print("New PDF created successfully!")
 
-# pdf_path = '/home/chandan/orange/code/Survey-Questionnire-Part1.pdf'
-# output_pdf_path = '/home/chandan/orange/code/output.pdf'
+# pdf_path = "D:\wfhack\challenge-assets\sustainability-survey-automation\Survey-Questions\Survey-Questionnire-Part2.pdf"
+# output_pdf_path = 'output.pdf'
 # year = "2021"
 
-# # Create PDF with sample answers for each question
+# # # Create PDF with sample answers for each question
 # create_pdf_with_answers(year, pdf_path, output_pdf_path)

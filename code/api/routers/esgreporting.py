@@ -52,7 +52,7 @@ def get_ping():
 
 
 def upload_file_bg_task(db: Session, filepaths, user, trackingid, year):
-    status = llmtraining.pdf_loader(filepaths)
+    status = llmtraining.pdf_loader(filepaths, year=year)
     for file in filepaths:
         out = SF.update_savedfile(db, file, user, year, trackingid, "DONE")
         print(out)
@@ -229,7 +229,7 @@ def question_answer(question: QuestionAnswer,
     db: Session = Depends(db.get_db),
     user: str = Depends(get_current_username)):
     all_years = SF.get_all_years(db, user)
-    response = llmquestions.query(question.inputQuestion, question.reportYear, all_years)
+    response, ans = llmquestions.query(question.inputQuestion, question.reportYear, all_years)
     return {
         "reportYear": question.reportYear,
         "questionnaireSummary": {

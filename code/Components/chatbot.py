@@ -55,12 +55,15 @@ def show():
         
         res = requests.post(f'{API_BASE_PATH}/questionnaire/generatefirstdraft/generateAnswer', headers=headers, json = myObj, auth=("stanleyjobson", "swordfish"))
         print(res.json())
-        
-        result = res.json()['questionnaireSummary']['response']['result']
-        
-        metadata = res.json()['questionnaireSummary']['response']['source_documents']
-        for meta in metadata:
-            print(meta['metadata'])
+        try:
+            result = res.json()['questionnaireSummary']['response']['result']
+            
+            metadata = res.json()['questionnaireSummary']['response']['source_documents']
+            for meta in metadata:
+                print(meta['metadata'])
+        except:
+            result = "No data available for this year"
+            metadata = ""
 
         # Display assistant response in chat message container
         with st.chat_message("assistant"):

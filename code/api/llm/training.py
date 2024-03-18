@@ -18,8 +18,8 @@ def pdf_loader(filenames, year):
     index_name: str = f"esg-survey-{year}"
 
     vector: AzureSearch = AzureSearch(
-        azure_search_endpoint="https://esg-survey.search.windows.net",
-        azure_search_key=os.getenv("AZURE_SEARCH_KEY"),
+        azure_search_endpoint="https://esg-demo.search.windows.net",
+        azure_search_key="m0NJknRuJEIMMLWeYheHYAUBafnvlIuap48eNQuHI2AzSeAQpZND",
         index_name=index_name,
         embedding_function=embeddings.embed_query,
     )
