@@ -95,6 +95,10 @@ Application Screenshots for Reference:
 
 ![Screen7](https://github.com/Hackathon2024-March/orange/assets/65178804/1c83ff0a-62fb-4fc3-9a32-201ffd76e861)
 
+API Endpoints on Swagger:
+
+![Swager](https://github.com/Hackathon2024-March/orange/assets/65178804/6cd8acc7-c716-4f2a-b627-3c67b9f91bf2)
+
 
 
 #### Other documentation is in BigDocumentation.md (please read thanks)
