@@ -11,6 +11,9 @@ dotenv.load_dotenv()
 
 DB_PATH = os.environ.get('POSTGRES_CONN_STR')
 
+if DB_PATH == None:
+    DB_PATH = "postgresql://postgres:password@db:5432/postgres"
+
 engine = create_engine(DB_PATH)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
