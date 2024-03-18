@@ -1,0 +1,622 @@
+{
+	"info": {
+		"_postman_id": "01bbc778-d151-4998-8dd7-af280b3f30e7",
+		"name": "ESG-Survey",
+		"description": "It is a tool to automate the process of filling out the ESG survey thus saving time and effort. It is capable of queries and responses. It allows users to upload the data files for queries. It also helps in the automated generation of PDFs after analysing the uploaded questionnaire with the help of LLMs and RAG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11346548",
+		"_collection_link": "https://planetary-crater-13008.postman.co/workspace/Abhinav~953f7911-c74f-4e1c-a5b0-81d9efbb3f84/collection/11346548-01bbc778-d151-4998-8dd7-af280b3f30e7?action=share&source=collection_link&creator=11346548"
+	},
+	"item": [
+		{
+			"name": "Upload Files",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "stanleyjobson",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "swordfish",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "documentName",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "DocumentURL",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "year",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://57.151.96.201:8000/esgreports/upload",
+					"protocol": "http",
+					"host": [
+						"57",
+						"151",
+						"96",
+						"201"
+					],
+					"port": "8000",
+					"path": [
+						"esgreports",
+						"upload"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Upload Files",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "documentName",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "DocumentURL",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://57.151.96.201:8000/esgreports/upload",
+							"protocol": "http",
+							"host": [
+								"57",
+								"151",
+								"96",
+								"201"
+							],
+							"port": "8000",
+							"path": [
+								"esgreports",
+								"upload"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Retrieve Files",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "stanleyjobson",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "swordfish",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"year\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://57.151.96.201:8000/esgreports/retrieve",
+					"protocol": "http",
+					"host": [
+						"57",
+						"151",
+						"96",
+						"201"
+					],
+					"port": "8000",
+					"path": [
+						"esgreports",
+						"retrieve"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Retrieve Files",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"year\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://57.151.96.201:8000/esgreports/retrieve",
+							"protocol": "http",
+							"host": [
+								"57",
+								"151",
+								"96",
+								"201"
+							],
+							"port": "8000",
+							"path": [
+								"esgreports",
+								"retrieve"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Generate First Draft",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "stanleyjobson",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "swordfish",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data; boundary=<calculated when request is sent>",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "SurveyQuestionnaireDocumentName",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "documentType",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "metadata",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://57.151.96.201:8000/questionnaire/generatefirstdraft/pdf",
+					"protocol": "http",
+					"host": [
+						"57",
+						"151",
+						"96",
+						"201"
+					],
+					"port": "8000",
+					"path": [
+						"questionnaire",
+						"generatefirstdraft",
+						"pdf"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Generate First Draft",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data; boundary=<calculated when request is sent>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://57.151.96.201:8000/questionnaire/generatefirstdraft/pdf",
+							"protocol": "http",
+							"host": [
+								"57",
+								"151",
+								"96",
+								"201"
+							],
+							"port": "8000",
+							"path": [
+								"questionnaire",
+								"generatefirstdraft",
+								"pdf"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get First Draft",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "stanleyjobson",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "swordfish",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://57.151.96.201:8000/questionnaire/generatefirstdraft/pdf/:reportYear/:TaskId/status",
+					"protocol": "http",
+					"host": [
+						"57",
+						"151",
+						"96",
+						"201"
+					],
+					"port": "8000",
+					"path": [
+						"questionnaire",
+						"generatefirstdraft",
+						"pdf",
+						":reportYear",
+						":TaskId",
+						"status"
+					],
+					"variable": [
+						{
+							"key": "reportYear",
+							"value": null
+						},
+						{
+							"key": "TaskId",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get First Draft",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://57.151.96.201:8000/questionnaire/generatefirstdraft/pdf/:reportYear/:TaskId/status",
+							"protocol": "http",
+							"host": [
+								"57",
+								"151",
+								"96",
+								"201"
+							],
+							"port": "8000",
+							"path": [
+								"questionnaire",
+								"generatefirstdraft",
+								"pdf",
+								":reportYear",
+								":TaskId",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "reportYear",
+									"value": null
+								},
+								{
+									"key": "TaskId",
+									"value": null
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get Draft Report",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://57.151.96.201:8000/firstdraftreport/download/result/:reportYear",
+					"protocol": "http",
+					"host": [
+						"57",
+						"151",
+						"96",
+						"201"
+					],
+					"port": "8000",
+					"path": [
+						"firstdraftreport",
+						"download",
+						"result",
+						":reportYear"
+					],
+					"variable": [
+						{
+							"key": "reportYear",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Draft Report",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://57.151.96.201:8000/firstdraftreport/download/result/:reportYear",
+							"protocol": "http",
+							"host": [
+								"57",
+								"151",
+								"96",
+								"201"
+							],
+							"port": "8000",
+							"path": [
+								"firstdraftreport",
+								"download",
+								"result",
+								":reportYear"
+							],
+							"variable": [
+								{
+									"key": "reportYear",
+									"value": null
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Question Answer",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "swordfish",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Stanleyjobson",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"reportYear\": \"\",\n  \"inputQuestion\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://57.151.96.201:8000/questionnaire/generatefirstdraft/generateAnswer",
+					"protocol": "http",
+					"host": [
+						"57",
+						"151",
+						"96",
+						"201"
+					],
+					"port": "8000",
+					"path": [
+						"questionnaire",
+						"generatefirstdraft",
+						"generateAnswer"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Question Answer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"reportYear\": \"\",\n  \"inputQuestion\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://57.151.96.201:8000/questionnaire/generatefirstdraft/generateAnswer",
+							"protocol": "http",
+							"host": [
+								"57",
+								"151",
+								"96",
+								"201"
+							],
+							"port": "8000",
+							"path": [
+								"questionnaire",
+								"generatefirstdraft",
+								"generateAnswer"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "stanleyjobson",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "swordfish",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
