@@ -54,7 +54,7 @@ def show():
         }
         
         res = requests.post(f'{API_BASE_PATH}/questionnaire/generatefirstdraft/generateAnswer', headers=headers, json = myObj, auth=("stanleyjobson", "swordfish"))
-        print(res.json())
+        #print(res.json())
         try:
             result = res.json()['questionnaireSummary']['response']['result']
             
@@ -75,6 +75,7 @@ def show():
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": response})
         
-        st.session_state.messages.append({"role": "assistant", "content": metadata})
+        if metadata:
+            st.session_state.messages.append({"role": "assistant", "content": metadata})
         
         
