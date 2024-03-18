@@ -16,7 +16,10 @@ password: swordfish
 when prompted
 
 ### Video Link
-https://team50filestorage.blob.core.windows.net/demo/hack_demo_uncut.mov
+https://drive.google.com/file/d/1UUU5dOPNAgj-fzCCFOn266r5sGBhMGKx/view?usp=sharing 
+
+### Postman Testing Collection
+[ESG-Survey.postman_collection.json](./artifacts/test_results/ESG-Survey.postman_collection.json)
 
 ### Assumptions
 - Training data documents provided to us, are uploaded via the API **/esgreports/upload**
