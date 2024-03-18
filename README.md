@@ -82,5 +82,18 @@ Langchain modules used:
     - Used to query LLM with RAG
 - **Prompts** from langchain.prompts
     - Prompt templates including System Prompt, User Prompt
+ 
+
+
+Application Screenshots for Reference:
+
+![Screen1](https://github.com/Hackathon2024-March/orange/assets/65178804/33115602-5028-4f10-85e5-08089edc5a1e)
+
+![Screen2](https://github.com/Hackathon2024-March/orange/assets/65178804/e25a8099-2b6a-4d89-a51e-89b04b67e7ed)
+
+![Screen3](https://github.com/Hackathon2024-March/orange/assets/65178804/cd883516-acdc-404d-96bd-c2faf7c095de)
+
+![Screen4](https://github.com/Hackathon2024-March/orange/assets/65178804/c5e34558-a7d1-42f1-ada6-aa30666839dd)
+
 
 #### Other documentation is in BigDocumentation.md (please read thanks)
