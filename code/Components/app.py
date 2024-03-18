@@ -96,7 +96,7 @@ def main():
         password = st.session_state.password
 
     if comp == "Home" :
-        if username == "Stanleyjobson" and password == "swordfish":
+        if username == "stanleyjobson" and password == "swordfish":
             home.show(username)
         else:
             # comp = "Home"
@@ -104,21 +104,21 @@ def main():
             login.show()
         
     elif comp == "File Upload":
-        if username == "Stanleyjobson" and password == "swordfish":
+        if username == "stanleyjobson" and password == "swordfish":
             file_upload.show()
         else:
             # comp = "Home"
             ret_cred = ""
             login.show()
     elif comp == "Report":
-        if username == "Stanleyjobson" and password == "swordfish":
+        if username == "stanleyjobson" and password == "swordfish":
             report.show()
         else:
             # comp = "Home"
             ret_cred = ""
             login.show()
     elif comp == "ChatBot":
-        if username == "Stanleyjobson" and password == "swordfish":
+        if username == "stanleyjobson" and password == "swordfish":
             chatbot.show()
         else:
             # comp = "Home"
