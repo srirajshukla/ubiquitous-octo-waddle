@@ -13,7 +13,6 @@ Use credentials
 username: stanleyjobson
 password: swordfish
 ```
-when prompted
 
 ### Video Link
 https://drive.google.com/file/d/1UUU5dOPNAgj-fzCCFOn266r5sGBhMGKx/view?usp=sharing 
@@ -48,9 +47,10 @@ https://drive.google.com/file/d/1UUU5dOPNAgj-fzCCFOn266r5sGBhMGKx/view?usp=shari
 - **Azure Blog Storage**: We store **Survey questionnares** and our **Generated Drafts**, as well as our training data on Blog Storage.
 
 **Novelty Factors**:
-- Since it was a major challenge to parse questions from **Tables** in our questionnares, we found CDP's URL where it displays a specific question. It was way easier to web-scrape and parse questions to generate answers.
-- Docker: docker compose?
-- Postgres
+- Since it was a major challenge to parse questions from **Tables** in our questionnaires, we found CDP's URL where it displays a specific question. It was way easier to web-scrape and parse questions to generate answers.
+- Docker: We used docker and docker-compose to build and deploy our application.
+- Postgres: We used postgres as our primary database.
+- Azure Vector Database: We used this vector store for our embedding storage and retrieval.
 
 ### Generating Survey Drafts
 The first step to filling out the survey is to extract questions from it.
