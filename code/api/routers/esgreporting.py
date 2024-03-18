@@ -181,6 +181,8 @@ def get_draft_status(
 
 ):
     file = SF.get_taskid_status(db, TaskId, user, reportYear)
+    if file is None:
+        raise HTTPException(status_code=400, detail="Malformed request")
     return {"taskid": file.trackerid, "status": file.embed_status, "created": datetime.datetime.now()}
 
 from requests_toolbelt import MultipartEncoder
