@@ -15,7 +15,7 @@ def pdf_loader(filenames, year):
     )
     print("loaded embeddings")
 
-    index_name: str = f"esg-survey-{year}"
+    index_name: str = f"esg-demo-{year}"
 
     vector: AzureSearch = AzureSearch(
         azure_search_endpoint="https://esg-demo.search.windows.net",

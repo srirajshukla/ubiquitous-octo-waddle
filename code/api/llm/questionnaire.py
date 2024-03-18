@@ -51,12 +51,12 @@ esg_prompt = ChatPromptTemplate(
 
 def query(query, year, allyears):
     if year not in allyears:
-        return "No relevant documents found for year "+year+".", False
-    index_name: str = f"esg-survey-{year}"
+        return "No relevant documents found for year "+year+"."
+    index_name: str = f"esg-demo-{year}"
 
     vector: AzureSearch = AzureSearch(
-        azure_search_endpoint="https://esg-survey.search.windows.net",
-        azure_search_key=os.getenv("AZURE_SEARCH_KEY"),
+        azure_search_endpoint="https://esg-demo.search.windows.net",
+        azure_search_key="m0NJknRuJEIMMLWeYheHYAUBafnvlIuap48eNQuHI2AzSeAQpZND",
         index_name=index_name,
         embedding_function=embeddings.embed_query,
     )
@@ -72,4 +72,4 @@ def query(query, year, allyears):
 
 
     response = esg_vector_chain.invoke(query)
-    return response, True
+    return response
