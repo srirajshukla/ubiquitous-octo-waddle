@@ -8,13 +8,21 @@
 - Differentiating Table Headers and data rows, and line breaks often mistaken as the next row in the parser.
 - Tables are broken manually and referenced at later part of the page due to space constraint, making it difficult for the parser to correlate the context.
 - Couldn’t use Python libraries to extract the tables as they aren’t able to distinguish between table response format and table headers.
-- Azure Document Intelligence has two different APIs for paragarph and table extraction. We had to come up with solution that could return both.
+- Azure Document Intelligence has two different APIs for paragraph and table extraction. We had to come up with a solution that could return both.
+
+### Questions Extraction
+
+- Extracting questions from the survey PDFs was a major challenge with the assumption that there is no particular format for the questions.
+- We tried different approaches like extracting questions with the help of LLM models and techniques like OCR (Optical Character Recognition)
+- A major problem in extraction via the LLM approach was the inconsistency in question formatting which led to inaccurate responses by the model (It was not able to identify all the existing questions in PDFs accurately)
+- We also finetuned this process by splitting the file data into small chunks for better results by the model. The results improved greatly but still the response were inconsistent and inaccurate to some extent.
+- The major problem with this approach was parsing data like Tables and other formatted data which led us to jump on to another approach using OCR
 
 ### PDF generation
 
 - Due to the unpredictability of LLM results and the table format returned, it was almost impossible to create a table from the response.
 - Sometimes LLMs weren’t able to answer the questions resulting in empty tables.
-- Formatting the table to accommodate in the pages without overflow.
+- Formatting the table to accommodate the pages without overflow.
 
 ### Application Deployment
 - We were using docker-compose to create and orchestrate our deployments. We couldn't use Azure Web Apps and Azure App Instances to deploy our apps.
