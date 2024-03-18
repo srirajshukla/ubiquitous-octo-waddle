@@ -93,7 +93,8 @@ Application Screenshots for Reference:
 
 ![Screen3](https://github.com/Hackathon2024-March/orange/assets/65178804/cd883516-acdc-404d-96bd-c2faf7c095de)
 
-![Screen5](https://github.com/Hackathon2024-March/orange/assets/65178804/9605c83a-d62b-4a85-ad8b-950589e43d94)
+![Screen7](https://github.com/Hackathon2024-March/orange/assets/65178804/1c83ff0a-62fb-4fc3-9a32-201ffd76e861)
+
 
 
 #### Other documentation is in BigDocumentation.md (please read thanks)
